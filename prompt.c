@@ -1,13 +1,11 @@
 #include "shell.h"
 
-/*
- *  display_prompt - a function that shows the prompt
+/**
+ * display_prompt - A function that displays the shell prompt.
  *
- *  Return - nothing
- *
-*/
-
-void display_prompt(void);
+ * Return: No return value.
+ */
+void display_prompt(void)
 {
-jhew_print("jhew_shell$");
+    jhew_print("jhew_shell$ ");
 }

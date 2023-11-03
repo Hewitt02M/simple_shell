@@ -1,24 +1,27 @@
 #include "shell.h"
 
-/*
- * read_command - read a line of input fromthe user.
+/**
+ * read_command - Read a line of input from the user.
  *
- * return - success with \n and user's input as a string or NULL on failure
-*/
-void read_command(char *option, size_t size);
+ * @option: A buffer to store the user's input.
+ * @size: The size of the buffer.
+ *
+ * Return: A string containing the user's input or NULL on failure.
+ */
+void read_command(char *option, size_t size)
 {
-if (fgets(option, size, stdin) == NULL)
-{
-if (foef(stdin))
-{
-jhew_print("\n");
-exit(EXIT_SUCCESS);
-}
-else
-{
-jhew_print("Error while reading input.\n");
-exit(EXIT_FAILURE);
-}
-}
-command[strcspn(command, "\n")] = '\0';
+    if (fgets(option, size, stdin) == NULL)
+    {
+        if (feof(stdin))
+        {
+            jhew_print("\n");
+            exit(EXIT_SUCCESS);
+        }
+        else
+        {
+            jhew_print("Error while reading input.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    option[strcspn(option, "\n")] = '\0';
 }

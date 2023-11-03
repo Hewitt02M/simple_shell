@@ -13,6 +13,11 @@
 void jhew_print(const char *file);
 void display_prompt(void);
 void xcut_funct(const char *command);
+<<<<<<< HEAD
 void read_command(char *command, size_t size);
+=======
+execute_command(command);
+read_command(command, sizeof(command));
+>>>>>>> bdb968e3aa4e6dddab5ddaa168ad02978b1125ee
 
 #endif

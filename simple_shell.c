@@ -7,15 +7,15 @@
  * Return: 0 on success.
  */
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
 	char *command[113];
 
-	while (1) 
+	while (1)
 	{
 		display_prompt();
-		read_command (command, sizeof(command));
-		execute_command (command)
+		read_command(command, sizeof(command));
+		execute_command(command)
 	}
 
 	return (0);

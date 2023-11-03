@@ -7,7 +7,6 @@
  *
 */
 
-void display_prompt(void);
-{
+void display_prompt(void) {
 jhew_print("jhew_shell$");
 }

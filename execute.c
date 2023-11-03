@@ -7,7 +7,8 @@
 */
 void xcut_funct(const char *command);
 {
-pid_t child_p = fork();
+pid_t child_p = fork()
+}
 if (child_pid == -1)
 {
 perror("fork")

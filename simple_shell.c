@@ -9,13 +9,13 @@
 
 int main(int argc, char *argv[]) 
 {
-	char *command;
+	char *command[113];
 
 	while (1) 
 	{
-		command = read_command();
-		execute_command(command);
-		free(command);
+		display_prompt();
+		read_command (command, sizeof(command));
+		execute_command (command)
 	}
 
 	return (0);

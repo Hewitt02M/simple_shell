@@ -10,10 +10,9 @@
 #include <signal.h>
 #include <stdio.h>
 
-void task_0_betty_proud(void);
-char *read_command(void);
-void execute_command(char *command);
-int main(int argc, char argv[]);
-void handle_command_with_arguments(char command);
+void jhew_print(const char *file);
+int main(void);
+void channel_prompt(void);
+void xcut_funct(const char *command);
 
 #endif

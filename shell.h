@@ -11,7 +11,6 @@
 #include <stdio.h>
 
 void jhew_print(const char *file);
-int main(void);
 int main(int argc, char *argv);
 void display_prompt(void);
 void xcut_funct(const char *command);

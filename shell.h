@@ -14,5 +14,6 @@ void jhew_print(const char *file);
 void display_prompt(void);
 void xcut_funct(const char *command);
 void read_command(char *command, size_t size);
+char *_strcat(char *dest, const char *src);
 
 #endif

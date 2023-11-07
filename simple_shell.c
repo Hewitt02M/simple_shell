@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void xcut_funct(char *command);
+void execute_command(char *command);
 
 int main(void)
 {
@@ -20,8 +20,13 @@ int main(void)
     return (0);
 }
 
+<<<<<<< HEAD
 void xcut_funct(char *command) {
     char *args[113];
+=======
+void execute_command(char *command) {
+    char *args[113]; 
+>>>>>>> 17416e7713901762d096f2ecaaf2825818229e9f
     int i = 0;
 
     args[i] = strtok(command, " \t\n");

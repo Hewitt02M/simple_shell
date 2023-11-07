@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "prompt.h"
 
 /**
  * display_prompt - A function that displays the shell prompt.

@@ -7,12 +7,6 @@
 
 void xcut_funct(char *command);
 
-/**
- * main - Entry point for the simple shell program.
- *
- * Return: Always 0.
- */
-
 int main(void)
 {
     char command[113];
@@ -20,14 +14,14 @@ int main(void)
     while (1) {
         display_prompt();
         read_command(command, sizeof(command));
-        execute_command(command);
+        xcut_funct(command);
     }
 
     return (0);
 }
 
 void xcut_funct(char *command) {
-    char *args[113]; 
+    char *args[113];
     int i = 0;
 
     args[i] = strtok(command, " \t\n");
@@ -45,7 +39,7 @@ void xcut_funct(char *command) {
         if (child_pid == -1) {
             perror("Fork failed");
         } else if (child_pid == 0) {
- 
+
             if (execve(args[0], args, NULL) == -1) {
                 perror("Execve failed");
                 exit(EXIT_FAILURE);

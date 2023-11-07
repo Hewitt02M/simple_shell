@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void xcut_funct(char *command);
+void execute_command(char *command);
 
 /**
  * main - Entry point for the simple shell program.
@@ -26,7 +26,7 @@ int main(void)
     return (0);
 }
 
-void xcut_funct(char *command) {
+void execute_command(char *command) {
     char *args[113]; 
     int i = 0;
 

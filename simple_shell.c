@@ -1,6 +1,8 @@
 #include "shell.h"
 #include "prompt.h"
 #include "user_input.h"
+#include "shell.h"
+#include "utils.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>

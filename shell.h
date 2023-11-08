@@ -15,5 +15,10 @@ void display_prompt(void);
 void xcut_funct(const char *command);
 void read_command(char *command, size_t size);
 char *_strcat(char *dest, const char *src);
+int (*imp_builtin(char *command))(char **args, char **front);
+int jb_exit(char **args, char **front);
+int jb_cd(char **args, char **front);
+int jb_setenv(char **args, char **front);
+int jb_unsetenv(char **args, char **front);
 
 #endif

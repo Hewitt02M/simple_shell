@@ -1,33 +1,14 @@
 #include "shell.h"
 #include "prompt.h"
 #include "user_input.h"
+#include "utils.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-void execute_command(char *command);
-
-/**
- * main - Entry point for the simple shell program.
- *
- * Return: Always 0.
- */
-
-int main(void)
+int main (void) 
 {
-    char command[113];
-
-    while (1) {
-        display_prompt();
-        read_command(command, sizeof(command));
-        execute_command(command);
-    }
-
-    return (0);
-}
-
-void execute_command(char *command) {
-    char *args[113]; 
+    char *args[113];
     int i = 0;
 
     args[i] = strtok(command, " \t\n");
@@ -39,21 +20,21 @@ void execute_command(char *command) {
     args[i] = NULL;
 
     if (args[0] != NULL) {
+        if (access(args[0], X_OK) == 0) {
+            pid_t child_pid = fork();
 
-        pid_t child_pid = fork();
-
-        if (child_pid == -1) {
-            perror("Fork failed");
-        } else if (child_pid == 0) {
- 
-            if (execve(args[0], args, NULL) == -1) {
-                perror("Execve failed");
-                exit(EXIT_FAILURE);
+            if (child_pid == -1) {
+                perror("Fork failed");
+            } else if (child_pid == 0) {
+                if (execve(args[0], args, NULL) == -1) {
+                    perror("Execve failed");
+                    exit(EXIT_FAILURE);
+                }
+            } else {
+                int status;
+                waitpid(child_pid, &status, 0);
             }
         } else {
-
-            int status;
-            waitpid(child_pid, &status, 0);
         }
     }
 }

@@ -1,5 +1,5 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -12,8 +12,9 @@
 
 void jhew_print(const char *file);
 void display_prompt(void);
-void xcut_funct(const char *command);
 void read_command(char *command, size_t size);
 char *_strcat(char *dest, const char *src);
+char *get_path_dir(const char *command);
+void execute_command(char *command);
 
 #endif

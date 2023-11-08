@@ -1,23 +1,52 @@
 #include "shell.h"
+#include "utils.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
-/**
- * _strcat - Concatenates two strings.
- * @dest: Destination string.
- * @src: Source string to be appended to dest.
- * Return: Pointer to the resulting string (dest).
- */
+char *_strdup(const char *str)
+{
+    char *dup;
+    size_t len = 0;
+
+    if (str == NULL)
+        return (NULL);
+
+    while (str[len])
+        len++;
+
+    dup = malloc(sizeof(char) * (len + 1));
+
+    if (dup == NULL)
+        return (NULL);
+
+    for (len = 0; str[len]; len++)
+        dup[len] = str[len];
+    dup[len] = '\0';
+    return (dup);
+}
+
 char *_strcat(char *dest, const char *src)
 {
-    char *result = dest;
+    size_t i, j;
 
-    while (*dest)
-        dest++;
-    while (*src)
+    for (i = 0; dest[i]; i++)
+        ;
+
+    for (j = 0; src[j]; j++)
+        dest[i + j] = src[j];
+
+    dest[i + j] = '\0';
+    return dest;
+}
+
+char *get_path_dir(const char *command)
+{
+    char *path_dir = _strdup(command);
+    if (!path_dir)
     {
-        *dest = *src;
-        dest++;
-        src++;
+        perror("strdup failed");
+        return (NULL);
     }
-    *dest = '\0';
-    return result;
+    return (path_dir);
 }

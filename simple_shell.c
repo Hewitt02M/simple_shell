@@ -1,30 +1,16 @@
 #include "shell.h"
 #include "prompt.h"
 #include "user_input.h"
-#include "shell.h"
+#include "execute.h"
 #include "utils.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 
-void execute_command(char *command);
 
-int main(void)
-{
-    char command[113];
-
-    while (1) {
-        display_prompt();
-        read_command(command, sizeof(command));
-        xcut_funct(command);
-    }
-
-    return (0);
-}
-
+/**
+ * execute_command - Execute a command.
+ * @command: The command to execute.
+ */
 void execute_command(char *command) {
-    char *args[113]; 
-
+    char *args[100];
     int i = 0;
 
     args[i] = strtok(command, " \t\n");
@@ -32,25 +18,51 @@ void execute_command(char *command) {
         i++;
         args[i] = strtok(NULL, " \t\n");
     }
-
     args[i] = NULL;
 
     if (args[0] != NULL) {
-
-        pid_t child_pid = fork();
-
-        if (child_pid == -1) {
-            perror("Fork failed");
-        } else if (child_pid == 0) {
-
-            if (execve(args[0], args, NULL) == -1) {
-                perror("Execve failed");
-                exit(EXIT_FAILURE);
-            }
+        if (strcmp(args[0], "exit") == 0) {
+            exit_builtin();
+            return;
+        } else if (strcmp(args[0], "env") == 0) {
+            env_builtin();
         } else {
+            char *command_path = get_path_dir(args[0]);
 
-            int status;
-            waitpid(child_pid, &status, 0);
+            if (command_path == NULL) {
+                fprintf(stderr, "Command not found: %s\n", args[0]);
+            } else {
+                pid_t child_pid = fork();
+
+                if (child_pid == -1) {
+                    perror("Fork failed");
+                    exit(EXIT_FAILURE);
+                } else if (child_pid == 0) {
+                    if (execve(command_path, args, NULL) == -1) {
+                        perror("Execve failed");
+                        exit(EXIT_FAILURE);
+                    }
+                } else {
+                    int status;
+                    waitpid(child_pid, &status, 0);
+                }
+            }
         }
     }
+}
+
+/**
+ * main - Entry point of the shell.
+ * Return: Always returns 0.
+ */
+int main(void) {
+    char command[113];
+
+    while (1) {
+        display_prompt();
+        read_command(command, sizeof(command));
+        execute_command(command);
+    }
+
+    return 0;
 }

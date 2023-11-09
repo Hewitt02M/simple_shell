@@ -1,6 +1,7 @@
 #include "shell.h"
 #include "user_input.h"
 #include <stddef.h>
+#include <string.h>
 
 /**
  * read_command - Read a line of input from the user.

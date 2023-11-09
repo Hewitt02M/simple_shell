@@ -7,14 +7,14 @@
 #include <stdlib.h>
 
 /**
- * execute_command - Execute a command.
+ * xcut_funct - Execute a command.
  * @command: The command to execute.
  */
-void execute_command(char *command) {
+void xcut_funct(const char *command) {
     char *args[100];
     int i = 0;
 
-    args[i] = strtok(command, " \t\n");
+    args[i] = strtok((char*)command, " \t\n");
     while (args[i] != NULL && i < 99) {
         i++;
         args[i] = strtok(NULL, " \t\n");
@@ -56,7 +56,6 @@ int main(void) {
     while (1) {
         display_prompt();
         read_command(command, sizeof(command));
-        execute_command(command);
     }
 
     return 0;

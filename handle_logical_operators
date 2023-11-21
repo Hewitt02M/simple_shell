@@ -1,0 +1,39 @@
+#include "shell.h"
+#include <string.h>
+#include <stdio.h>
+
+void handle_logical_operators(char *command) {
+    char *and_operator = "&&";
+    char *or_operator = "||";
+
+    char *and_pos = strstr(command, and_operator);
+    char *or_pos = strstr(command, or_operator);
+
+    if (and_pos != NULL || or_pos != NULL) {
+        /* Implementation logic for handling && and || operators */
+        /* For example, you can replace the operators with a space */
+        if (and_pos != NULL) {
+            *and_pos = ' ';
+        } else if (or_pos != NULL) {
+            *or_pos = ' ';
+        }
+
+        /* Continue with your logic... */
+    }
+}
+
+void execute_file_commands(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file != NULL) {
+        char line[1024];
+        while (fgets(line, sizeof(line), file) != NULL) {
+            /* Process and execute each line */
+            remove_comments(line);
+            handle_variables(line);
+            handle_logical_operators(line);
+            handle_alias(line);
+            execute_command(line);
+        }
+        fclose(file);
+    }
+}

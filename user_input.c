@@ -1,5 +1,4 @@
 #include "shell.h"
-#include "user_input.h"
 #include <stddef.h>
 #include <string.h>
 
@@ -11,6 +10,7 @@
  *
  * Return: A string containing the user's input or NULL on failure.
  */
+
 void read_command(char *option, size_t size)
 {
     if (fgets(option, size, stdin) == NULL)
